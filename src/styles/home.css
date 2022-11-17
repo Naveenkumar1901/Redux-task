@@ -1,0 +1,65 @@
+.container,
+.container-change {
+  height: 100vh;
+  width: 100%;
+  color: var(--text-primary);
+  background-color: black;
+}
+.container-change {
+  background-color: antiquewhite;
+}
+.inner-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.compartment1 {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.compartment2 {
+  width: 34%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compartment3 {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.addbtn,
+.addbtn-change {
+  border-radius: 5px;
+  padding: 5px;
+  border: none;
+  margin-left: 10px;
+  background-color: black;
+  color: white;
+}
+
+.addbtn-change {
+  background-color: white;
+  color: black;
+}
+
+.input-text {
+  outline: none;
+}
+
+.username,
+.username-change {
+  color: black;
+}
+.username-change {
+  color: white;
+}
