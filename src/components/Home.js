@@ -1,44 +1,59 @@
 import React, { useState } from 'react';
 import MaterialUISwitch from './Switch';
-import Switch from 'react-switch';
-import useLocalStorage from 'use-local-storage';
 import '../styles/home.css';
-const Home = () => {
-  //   const defaultLight = window.matchMedia(
-  //     '(prefers-color-scheme: dark)'
-  //   ).matches;
-  //   const [theme, setTheme] = useLocalStorage(
-  //     'theme',
-  //     defaultLight ? 'dark' : 'light'
-  //   );
-  const [checked, setChecked] = useState(false);
-  const [theme, setTheme] = useState(true);
-  const switchTheme = () => {
-    setChecked(!checked);
-    setTheme(!theme);
-  };
+import { useDispatch, useSelector } from 'react-redux';
+import { changeTheme } from '../slices/themeSlice';
+import { changeText } from '../slices/usernameSlice';
+export default function Home() {
+  const theme = useSelector((state) => state.color.theme);
+  const text = useSelector((state) => state.user.text);
+  const [value, setValue] = useState('');
+  const dispatch = useDispatch();
 
   return (
-    <>
-      <div className={theme ? 'container-change' : 'container'}>
-        <div className="inner-container">
-          <div className="compartment1">
-            {/* <MaterialUISwitch onClick={switchTheme} />
-          Switch to {theme === 'light' ? 'dark' : 'light'} Theme
-          {''} */}
-            <MaterialUISwitch onChange={switchTheme} checked={checked} />
-          </div>
-          <div className="compartment2">
-            <input type="text" className="input-text" />
-            <button className={theme ? 'addbtn' : 'addbtn-change'}>Add</button>
-          </div>
-          <div className="compartment3">
-            <p className={theme ? 'username' : 'username-change'}>Username</p>
-          </div>
+    <div className={theme === 'light' ? 'container-change' : 'container'}>
+      <div className="inner-container">
+        <div className="compartment1">
+          <MaterialUISwitch
+            onClick={() => {
+              dispatch(changeTheme());
+            }}
+            checked={theme === 'light' ? false : true}
+          />
+        </div>
+        <form
+          className="compartment2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            Home();
+          }}
+        >
+          <input
+            type="text"
+            className="input-text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <button
+            className={theme === 'light' ? 'addbtn' : 'addbtn-change'}
+            onClick={() => dispatch(changeText(value))}
+          >
+            Add
+          </button>
+        </form>
+        <div className="compartment3">
+          <span className={theme === 'light' ? 'username' : 'username-change'}>
+            Username: &nbsp;
+            <span
+              className={
+                theme === 'light' ? 'displayname' : 'displayname-change'
+              }
+            >
+              {text}
+            </span>
+          </span>
         </div>
       </div>
-    </>
+    </div>
   );
-};
-
-export default Home;
+}

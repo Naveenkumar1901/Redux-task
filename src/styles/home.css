@@ -63,3 +63,11 @@
 .username-change {
   color: white;
 }
+
+.displayname,
+.dispalyname-change {
+  color: brown;
+}
+.displayname-change {
+  color: yellow;
+}
